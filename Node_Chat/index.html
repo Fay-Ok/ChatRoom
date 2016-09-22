@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<head>
+    <title>Chat - Customer Module</title>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+</head>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<div id="wrapper">
+    <div id="menu">
+        <p class="welcome">Welcome, <b></b></p>
+        <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+        <div style="clear:both"></div>
+    </div>
+
+    <div id="chatbox"></div>
+    <form id="chat_form" action="">
+        <input type="text" id="chat_input">
+        <input type="submit" value="Send">
+    </form>
+    <span></span>
+
+    <script>
+        var socket= io.connect('http://localhost:8080');   
+        $('#chat_form').submit(function(e){
+            e.preventDefault();
+            var message = $('#chat_input').val();
+             $('#chat_input').val(" ");
+             $('#chatbox').text(message);
+                socket.emit('messages', message);
+             });
+
+    </script>
