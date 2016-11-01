@@ -26,7 +26,6 @@
             e.preventDefault();
             var message = $('#chat_input').val();
              $('#chat_input').val(" ");
-             $('#chatbox').text(message);
                 socket.emit('messages', message);
              });
 
